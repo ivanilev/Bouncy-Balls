@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -72,6 +72,133 @@
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Ball = function () {
+    //internal properties
+    var _x;
+    var _y;
+    var _radius;
+    var _color;
+
+    //Pseudo constructor implementation  
+    function _constructor(x, y, radius, color) {
+        _x = x;
+        _y = y;
+        _radius = radius;
+        _color = color;
+    };
+    _constructor();
+
+    // Functions
+    function draw(c) {
+        c.beginPath();
+        c.arc(_x, _y, _radius, 0, Math.PI * 2, false);
+        c.fillStyle = _color;
+        c.fill();
+        c.closePath();
+    }
+
+    function update() {
+        draw();
+    }
+
+    return {
+        x: _x,
+        y: _y,
+        radius: _radius,
+        color: _color
+    };
+}();
+
+exports.Ball = Ball;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var Helper = function () {
+    var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
+
+    // Utility Functions
+    function randomIntFromRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    function dist(x1, y1, x2, y2) {
+        var xDist = x2 - x1;
+        var yDist = y2 - y1;
+
+        return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
+    };
+    function randomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    return {
+
+        getRandomColor: randomColor,
+        getRandomIntFromRange: randomIntFromRange,
+        getDistance: dist
+    };
+}();
+
+exports.Helper = Helper;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+//Testing purposes
+var TestDev = function () {
+    function log() {
+        if ("development".trim() === 'development') {
+            console.info('Running development environtment');
+            //Code here 
+        } else {
+            if ("development".trim() === 'production') {
+                console.info('Running production environtment');
+            }
+            //User shouldn't be seeing this
+            console.error('Warning! Environment initialize crash!');
+            console.trace();
+        }
+    };
+    return { logEnvironment: log };
+}();
+
+exports.TestDev = TestDev;
+
+/***/ }),
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Helper = __webpack_require__(1);
+
+var _Ball = __webpack_require__(0);
+
+var _testDev = __webpack_require__(2);
+
+if ("development".trim() === 'development') {
+    _testDev.TestDev.logEnvironment();
+}
 
 // Initial Setup
 var canvas = document.querySelector('canvas');
@@ -86,9 +213,6 @@ var mouse = {
     y: innerHeight / 2
 };
 
-var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
-
-// Event Listeners
 addEventListener('mousemove', function (event) {
     mouse.x = event.clientX;
     mouse.y = event.clientY;
@@ -101,44 +225,8 @@ addEventListener('resize', function () {
     init();
 });
 
-// Utility Functions
-function randomIntFromRange(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomColor(colors) {
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function distance(x1, y1, x2, y2) {
-    var xDist = x2 - x1;
-    var yDist = y2 - y1;
-
-    return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
-// Objects
-function Object(x, y, radius, color) {
-    this.x = x;
-    this.y = y;
-    this.radius = radius;
-    this.color = color;
-}
-
-Object.prototype.update = function () {
-    this.draw();
-};
-
-Object.prototype.draw = function () {
-    c.beginPath();
-    c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    c.fillStyle = this.color;
-    c.fill();
-    c.closePath();
-};
-
 // Implementation
-var objects = void 0;
+//let objects
 function init() {
     objects = [];
 
@@ -149,10 +237,11 @@ function init() {
 
 // Animation Loop
 function animate() {
-    requestAnimationFrame(animate);
-    c.clearRect(0, 0, canvas.width, canvas.height);
+    // requestAnimationFrame(animate)
 
-    c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y);
+    // c.clearRect(0, 0, canvas.width, canvas.height)
+
+    // c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
     // objects.forEach(object => {
     //  object.update();
     // });

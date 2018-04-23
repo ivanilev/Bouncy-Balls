@@ -2,16 +2,16 @@
   "name": "canvas-template",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "canvas.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-prod": "set NODE_ENV=production & set DEBUG=false & webpack",
+    "start-dev": "webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "gsap": "^1.19.1",
-    "jquery": "^3.2.1",
     "normalize-css": "^2.3.1"
   },
   "devDependencies": {
@@ -19,7 +19,10 @@
     "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
     "browser-sync": "^2.18.8",
-    "browser-sync-webpack-plugin": "^1.1.4",
-    "webpack": "^2.5.1"
+    "browser-sync-webpack-plugin": "^1.2.0",
+    "createjs": "^1.0.1",
+    "jquery": "^3.3.1",
+    "webpack": "^2.5.1",
+    "webpack-cli": "^2.0.15"
   }
 }

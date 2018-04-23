@@ -1,4 +1,6 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const webpack = require('webpack');
+
 
 module.exports = {
     entry: './src/canvas.js',
@@ -7,7 +9,7 @@ module.exports = {
         filename: 'canvas.bundle.js'
     },
     module: {
-        loaders: [{
+        rules: [{
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
             use: {
@@ -18,7 +20,15 @@ module.exports = {
             }
         }]
     },
-    plugins: [
+    plugins: [  //'process.env.NODE_ENV': '"production"'
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development', 
+            DEBUG: false        
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
         new BrowserSyncPlugin({
             host: 'localhost',
             port: 3000,
