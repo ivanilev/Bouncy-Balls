@@ -2,10 +2,10 @@
   "name": "canvas-template",
   "version": "1.0.0",
   "description": "",
-  "main": "canvas.js",
+  "main": "app.js",
   "scripts": {
-    "start-prod": "set NODE_ENV=production & set DEBUG=false & webpack",
-    "start-dev": "webpack"
+    "start-prod": "set NODE_ENV=production & set DEBUG=false & webpack --watch",
+    "start-dev": "webpack --watch"
   },
   "keywords": [],
   "author": "",

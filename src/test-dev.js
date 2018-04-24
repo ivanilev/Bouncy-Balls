@@ -17,6 +17,6 @@ var TestDev = (function() {
         }
     };
     return {logEnvironment: log}
-})();
+}());
 
 export {TestDev};

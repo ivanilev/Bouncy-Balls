@@ -1,40 +1,21 @@
 'use strict'
-var Ball = (function(){
-    //internal properties
-    var _x;
-    var _y;
-    var _radius;
-    var _color;
+class Ball{
 
-    //Pseudo constructor implementation  
-    function _constructor(x,y,radius,color){
-        _x = x;
-        _y = y;
-        _radius = radius;
-        _color = color;
+    constructor(x, y, radius, color){
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
     };
-    _constructor();
 
-    // Functions
-    function draw(c){
+    Draw(c) {
         c.beginPath();
-        c.arc(_x, _y, _radius, 0, Math.PI * 2, false);
-        c.fillStyle = _color;
+        c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+        c.fillStyle = this.color;
         c.fill();
+        c.stroke();
         c.closePath();
     }
-
-    function update(){
-        draw();
-    }
-
-    return {
-        x: _x,
-        y: _y,
-        radius: _radius,
-        color: _color
-    };
-
-})();
+};
 
 export {Ball};

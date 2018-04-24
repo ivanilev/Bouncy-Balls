@@ -1,12 +1,11 @@
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const webpack = require('webpack');
 
-
 module.exports = {
-    entry: './src/canvas.js',
+    entry: './src/app.js',
     output: {
         path: __dirname + '/dist/js',
-        filename: 'canvas.bundle.js'
+        filename: 'app.bundle.js'
     },
     module: {
         rules: [{
