@@ -10,6 +10,7 @@ class Ball{
         this.dx = dx;
         this.radius = radius;
         this.color = color;
+        this.weight = radius/Helper.maxRadius;
     };
 
     Update(){
@@ -18,7 +19,7 @@ class Ball{
             this.dy = - this.dy * Helper.FRICTION;
         }
         else{
-            this.dy += Helper.GRAVITY;
+            this.dy += Helper.GRAVITY * this.weight;
         }
         //If the ball is out of screen bounce it back
         if (this.x + this.radius + this.dx > Helper.canvas.width || this.x -  this.radius <= 0){

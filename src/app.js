@@ -34,11 +34,11 @@ if (process.env.NODE_ENV.trim() === 'development') {
             a = new Ball(randPlaceW, randPlaceH, 10, 'red');
             a.Draw(canvasContext);
             
-            for (let i = 0; i < 1; i++) {
+            for (let i = 0; i < 5; i++) {
                 var ball;
 
                 var randColor = Helper.getRandomColor();
-                var randSize = Helper.getRandomIntFromRange(25,40); 
+                var randSize = Helper.getRandomIntFromRange(Helper.minRadius, Helper.maxRadius); 
                 var randPlaceW = Helper.getRandomIntFromRange(randSize, canvas.width - randSize);
                 var randPlaceH = Helper.getRandomIntFromRange(randSize, canvas.height - randSize);
                 var randXVelocity = Helper.getRandomIntFromRange(-2,2);
