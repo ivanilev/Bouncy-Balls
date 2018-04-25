@@ -8,7 +8,8 @@ module.exports = {
         filename: 'app.bundle.js'
     },
     module: {
-        rules: [{
+        rules: [
+        {
             test: /\.js$/,
             exclude: /(node_modules|bower_components)/,
             use: {
@@ -17,7 +18,12 @@ module.exports = {
                     presets: ['env']
                 }
             }
-        }]
+        },
+        {
+            test:  /\.css$/,
+            loader:'style-loader!css-loader'
+        }
+    ]
     },
     plugins: [  //'process.env.NODE_ENV': '"production"'
         new webpack.EnvironmentPlugin({

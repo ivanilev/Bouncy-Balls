@@ -1,7 +1,6 @@
 'use strict'
-// TODO make this better, maybe a file? Helper?
-var gravity = 1;
-var friction = 0.89;
+
+import { Helper } from "./Helper";
 
 class Ball{
     constructor(x, y, dy, dx, radius, color){
@@ -13,16 +12,16 @@ class Ball{
         this.color = color;
     };
 
-    Update(canvas){
+    Update(){
         //If the ball is out of screen apply third law of motion, else apply gravity
-        if (this.y + this.radius + this.dy > canvas.canvas.height){
-            this.dy = - this.dy * friction;
+        if (this.y + this.radius + this.dy > Helper.canvas.height){
+            this.dy = - this.dy * Helper.FRICTION;
         }
         else{
-            this.dy += gravity;
+            this.dy += Helper.GRAVITY;
         }
         //If the ball is out of screen bounce it back
-        if (this.x + this.radius + this.dx > canvas.canvas.width || this.x -  this.radius <= 0){
+        if (this.x + this.radius + this.dx > Helper.canvas.width || this.x -  this.radius <= 0){
             this.dx = -this.dx;
         }
 
@@ -30,10 +29,11 @@ class Ball{
         this.y += this.dy;
         this.x += this.dx;
 
-        this.Draw(canvas);
+        this.Draw();
     };
 
-    Draw(c) {
+    Draw() {
+        var c = Helper.canvasContext;
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
         c.fillStyle = this.color;

@@ -2,34 +2,37 @@ import {Helper} from './Helper'
 import {Ball} from './Ball'
 import {TestDev} from './test-dev'
 
+require('../src/css/style.css');
+
 if (process.env.NODE_ENV.trim() === 'development') {
      TestDev.logEnvironment();
 }
 
 (function(){
-    var canvas, c;
+    var canvas, canvasContext;
     var Balls;
     var a;
     var App = {
+        getWindowSize:function(){
+            var d= document, root= d.documentElement, body= d.body;
+            var wid= window.innerWidth || root.clientWidth || body.clientWidth, 
+            hi= window.innerHeight || root.clientHeight || body.clientHeight ;
+            return [wid,hi]
+        },
         init: function(){
-            canvas = this.getCanvasContext().canvas;
-            c = this.getCanvasContext().c;
+            canvas = Helper.canvas;
+            canvasContext = Helper.canvasContext;
 
-            canvas.width = innerWidth
-            canvas.height = innerHeight
+            canvas.width = innerWidth * (9/10);
+            canvas.height = innerHeight * (9/10);
 
             this.addListeners(); // this. ? -> if error
             this.initObjects();
         },
-        getCanvasContext(){
-            canvas = document.querySelector('canvas');
-            c = canvas.getContext('2d');
-            return {canvas, c};
-        },
         initObjects: function(){
             Balls = [];
             a = new Ball(randPlaceW, randPlaceH, 10, 'red');
-            a.Draw(c);
+            a.Draw(canvasContext);
             
             for (let i = 0; i < 1; i++) {
                 var ball;
@@ -51,26 +54,29 @@ if (process.env.NODE_ENV.trim() === 'development') {
             }
         },
         addListeners: function(){
-            addEventListener('resize', () => {
+            canvas = Helper.canvas;
+
+            addEventListener('resize', (e) => {
                 canvas.width = innerWidth
                 canvas.height = innerHeight
-
                 this.init();
             });
-            addEventListener('click', () => {
+            canvas.addEventListener('click', (e) => {
                 this.init();
+
+                console.log('canvas clicked');
+                e.stopPropagation();
             });
         },
         render: function(){
             var self = this;
-
-            self.getCanvasContext().c.clearRect(0, 0, canvas.width, canvas.height);
+            Helper.canvasContext.clearRect(0, 0, canvas.width, canvas.height);
             
             requestAnimationFrame(function(){
                 self.render();
                 
                 Balls.forEach(function(item){
-                    item.Update(c);
+                    item.Update(Helper.canvasContext);
                 });
 
             });

@@ -2,7 +2,9 @@
 
 // Utility Functions
 var Helper = (function(){
-    
+    var canvas = document.querySelector('canvas');
+    var canvasContext = canvas.getContext('2d');
+
     function randomIntFromRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min)
     };
@@ -24,7 +26,6 @@ var Helper = (function(){
         }
         return color;
     };
-    
     //Prettier random colors
     function randomPrettyColor() {
         var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
@@ -36,6 +37,10 @@ var Helper = (function(){
         getRandomPrettyColor: randomPrettyColor,
         getRandomIntFromRange: randomIntFromRange,
         getDistance: dist,
+        canvas: canvas,
+        canvasContext: canvasContext,
+        GRAVITY: 1,
+        FRICTION: 0.5
     };
 
 }());
