@@ -1,8 +1,8 @@
 'use strict'
-var Helper = (function(){
-    var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
 
-    // Utility Functions
+// Utility Functions
+var Helper = (function(){
+    
     function randomIntFromRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min)
     };
@@ -13,13 +13,27 @@ var Helper = (function(){
     
         return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
     };
-
-    function randomColor() {
+    
+    //Truly random color
+    //https://stackoverflow.com/questions/1484506/random-color-generator
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
+    
+    //Prettier random colors
+    function randomPrettyColor() {
+        var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
         return colors[Math.floor(Math.random() * colors.length)]
     };
 
     return {
-        getRandomColor: randomColor,
+        getRandomColor: getRandomColor,
+        getRandomPrettyColor: randomPrettyColor,
         getRandomIntFromRange: randomIntFromRange,
         getDistance: dist,
     };

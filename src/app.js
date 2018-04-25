@@ -8,12 +8,12 @@ if (process.env.NODE_ENV.trim() === 'development') {
 
 (function(){
     var canvas, c;
-    var Balls = [];
+    var Balls;
     var a;
     var App = {
         init: function(){
-            canvas = document.querySelector('canvas');
-            c = canvas.getContext('2d');
+            canvas = this.getCanvasContext().canvas;
+            c = this.getCanvasContext().c;
 
             canvas.width = innerWidth
             canvas.height = innerHeight
@@ -21,23 +21,33 @@ if (process.env.NODE_ENV.trim() === 'development') {
             this.addListeners(); // this. ? -> if error
             this.initObjects();
         },
+        getCanvasContext(){
+            canvas = document.querySelector('canvas');
+            c = canvas.getContext('2d');
+            return {canvas, c};
+        },
         initObjects: function(){
-            
+            Balls = [];
             a = new Ball(randPlaceW, randPlaceH, 10, 'red');
-            // Ball.CreateBall(150,150,10,'red');
             a.Draw(c);
             
-            for (let i = 0; i < 300; i++) {
-                var a;
+            for (let i = 0; i < 1; i++) {
+                var ball;
 
-                var randPlaceW = Helper.getRandomIntFromRange(0, canvas.width);
-                var randPlaceH = Helper.getRandomIntFromRange(0, canvas.height);
                 var randColor = Helper.getRandomColor();
-                var randSize = Helper.getRandomIntFromRange(5,15);
+                var randSize = Helper.getRandomIntFromRange(25,40); 
+                var randPlaceW = Helper.getRandomIntFromRange(randSize, canvas.width - randSize);
+                var randPlaceH = Helper.getRandomIntFromRange(randSize, canvas.height - randSize);
+                var randXVelocity = Helper.getRandomIntFromRange(-2,2);
+                var randYVelocity = Helper.getRandomIntFromRange(-2,2);
 
-                a = new Ball(randPlaceW, randPlaceH, randSize, randColor);// Ball.CreateBall(150,150,10,'red');
+                ball = new Ball(
+                    randPlaceW, randPlaceH, 
+                    randYVelocity, randXVelocity, 
+                    randSize, randColor
+                );
             
-                Balls.push(a);
+                Balls.push(ball);
             }
         },
         addListeners: function(){
@@ -45,31 +55,28 @@ if (process.env.NODE_ENV.trim() === 'development') {
                 canvas.width = innerWidth
                 canvas.height = innerHeight
 
-                this.render();
+                this.init();
+            });
+            addEventListener('click', () => {
+                this.init();
             });
         },
         render: function(){
-                        
-            // items.forEach(function(item){
-            //     copy.push(item)
-            //   });
+            var self = this;
+
+            self.getCanvasContext().c.clearRect(0, 0, canvas.width, canvas.height);
             
-            // for (let i=0; i<items.length; i++) {
-            //     copy.push(items[i])
-            //   }
+            requestAnimationFrame(function(){
+                self.render();
+                
+                Balls.forEach(function(item){
+                    item.Update(c);
+                });
 
-
-            //clear screen
-            c.clearRect(0, 0, canvas.width, canvas.height)
-            Balls.forEach(function(item){
-                item.Draw(c);
-                console.log(item);
             });
-            //render stuff
-            //a.Draw(c);
-
         }
     }
+    
     App.init();
     App.render();
 }());
