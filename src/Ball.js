@@ -16,29 +16,29 @@ class Ball{
     };
 
     Update(Balls){
-        //If the ball is out of screen apply third law of motion, else apply gravity
-        if (this.y + this.radius + this.velocity.y > Helper.canvas.height){
-            this.velocity.y = - this.velocity.y * Helper.FRICTION;
-        }
-        else{
-            this.velocity.y += Helper.GRAVITY * this.weight;
-        }
-        //If the ball is out of screen bounce it back
-        if (this.x + this.radius + this.velocity.x > Helper.canvas.width || this.x -  this.radius <= 0){
-            this.velocity.x = -this.velocity.x;
-        } 
-
-        //If the balls have colided => log it
+        //If the balls have colided resolve collision
         for (let i = 0; i < Balls.length; i++) {
             if (this === Balls[i]){continue;}
-            if (Helper.getDistance(this.x, this.y, Balls[i].x, Balls[i].y) < this.radius + Balls[i].radius){
-                console.log('has colided');
-                this.velocity.x = -this.velocity.x;
-                this.velocity.y = -this.velocity.y;
+            if (Helper.getDistance(this.x, this.y, Balls[i].x, Balls[i].y) < this.radius + Balls[i].radius) {
+                Helper.resolveCollision(this,Balls[i]);
             }
-            
         }
 
+        //If the ball is out of screen apply third law of motion, else apply gravity
+        if (this.y + this.radius + this.velocity.y > Helper.canvas.height) {
+            this.velocity.y = - this.velocity.y * Helper.FRICTION;
+        }
+        else {
+            this.velocity.y += Helper.GRAVITY * this.weight;
+        }
+
+        //If the ball is out of screen bounce it back
+        if (this.x + this.radius + this.velocity.x > Helper.canvas.width || this.x - this.radius <= 0) {
+            this.velocity.x *= -1;
+        }
+        if (this.y + this.radius + this.velocity.y > Helper.canvas.height || this.y - this.radius <= 0) {
+            this.velocity.y *= -1;
+        }
 
         //Move the ball and draw new position on canvas on canvas 
         this.y += this.velocity.y;

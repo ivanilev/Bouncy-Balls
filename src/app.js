@@ -4,7 +4,8 @@ import {TestDev} from './test-dev'
 
 require('../src/css/style.css');
 
-if (process.env.NODE_ENV.trim() === 'development') {
+var isDevEnv = (process.env.NODE_ENV.trim() === 'development');
+if (isDevEnv) {
      TestDev.logEnvironment();
 }
 
@@ -21,12 +22,11 @@ if (process.env.NODE_ENV.trim() === 'development') {
             canvas.width = innerWidth * (9/10);
             canvas.height = innerHeight * (9/10);
 
-            this.addListeners(); // this. ? -> if error
+            this.addListeners();
             this.initObjects();
         },
         initObjects: function(){
             Balls = [];
-           
             
             for (let i = 0; i < 10; i++) {
                 let randColor = Helper.getRandomColor();
@@ -39,8 +39,7 @@ if (process.env.NODE_ENV.trim() === 'development') {
 
                 if (i!==0){
                     for (let j = 0; j < Balls.length; j++) {
-                        //if they're overlapping
-                        let distanceBetweenCurrentAnd
+                        //if it's overlapping on spawn place it somewhere else
                         if (Helper.getDistance(randX, randY, Balls[j].x, Balls[j].y)  < Helper.maxRadius * 2){
                             randX = Helper.getRandomIntFromRange(randSize, canvas.width - randSize);
                             randY = Helper.getRandomIntFromRange(randSize, canvas.height - randSize);
@@ -56,23 +55,20 @@ if (process.env.NODE_ENV.trim() === 'development') {
                     randYVelocity, randXVelocity, 
                     randSize, randColor
                 );
-            
-
+                
                 Balls.push(ball);
             }
         },
         addListeners: function(){
-            canvas = Helper.canvas;
-
             addEventListener('resize', (e) => {
                 canvas.width = innerWidth
                 canvas.height = innerHeight
-                //this.init();
+                this.init();
             });
             canvas.addEventListener('click', (e) => {
                 this.init();
 
-                console.log('canvas clicked');
+                if (isDevEnv){console.log('canvas clicked')};
                 e.stopPropagation();
             });
         },
