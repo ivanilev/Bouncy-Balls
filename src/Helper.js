@@ -4,8 +4,8 @@
 var Helper = (function(){
     var canvas = document.querySelector('canvas');
     var canvasContext = canvas.getContext('2d');
-    var minRadius = 5;
-    var maxRadius = 40;
+    var minRadius = 25;
+    var maxRadius = 35;
 
     function randomIntFromRange(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min)

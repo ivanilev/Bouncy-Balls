@@ -6,29 +6,43 @@ class Ball{
     constructor(x, y, dy, dx, radius, color){
         this.x = x;
         this.y = y;
-        this.dy = dy;
-        this.dx = dx;
+        this.velocity = {
+            y: dy,
+            x: dx
+        };
         this.radius = radius;
         this.color = color;
         this.weight = radius/Helper.maxRadius;
     };
 
-    Update(){
+    Update(Balls){
         //If the ball is out of screen apply third law of motion, else apply gravity
-        if (this.y + this.radius + this.dy > Helper.canvas.height){
-            this.dy = - this.dy * Helper.FRICTION;
+        if (this.y + this.radius + this.velocity.y > Helper.canvas.height){
+            this.velocity.y = - this.velocity.y * Helper.FRICTION;
         }
         else{
-            this.dy += Helper.GRAVITY * this.weight;
+            this.velocity.y += Helper.GRAVITY * this.weight;
         }
         //If the ball is out of screen bounce it back
-        if (this.x + this.radius + this.dx > Helper.canvas.width || this.x -  this.radius <= 0){
-            this.dx = -this.dx;
+        if (this.x + this.radius + this.velocity.x > Helper.canvas.width || this.x -  this.radius <= 0){
+            this.velocity.x = -this.velocity.x;
+        } 
+
+        //If the balls have colided => log it
+        for (let i = 0; i < Balls.length; i++) {
+            if (this === Balls[i]){continue;}
+            if (Helper.getDistance(this.x, this.y, Balls[i].x, Balls[i].y) < this.radius + Balls[i].radius){
+                console.log('has colided');
+                this.velocity.x = -this.velocity.x;
+                this.velocity.y = -this.velocity.y;
+            }
+            
         }
 
+
         //Move the ball and draw new position on canvas on canvas 
-        this.y += this.dy;
-        this.x += this.dx;
+        this.y += this.velocity.y;
+        this.x += this.velocity.x;
 
         this.Draw();
     };
