@@ -1,6 +1,7 @@
 import {Helper} from './Helper'
 import {Ball} from './Ball'
 import {TestDev} from './test-dev'
+import {Mouse} from './Mouse'
 
 require('../src/css/style.css');
 
@@ -29,7 +30,8 @@ if (isDevEnv) {
             Balls = [];
             
             for (let i = 0; i < 10; i++) {
-                let randColor = Helper.getRandomColor();
+                
+                let randColor = isDevEnv ? Helper.getRandomPrettyColor() : Helper.getRandomColor();
                 let randSize = Helper.getRandomIntFromRange(Helper.minRadius, Helper.maxRadius); 
                 let randXVelocity = Helper.getRandomIntFromRange(-2,2);
                 let randYVelocity = Helper.getRandomIntFromRange(-2,2);
@@ -61,12 +63,26 @@ if (isDevEnv) {
         },
         addListeners: function(){
             addEventListener('resize', (e) => {
-                canvas.width = innerWidth
-                canvas.height = innerHeight
                 this.init();
             });
+            addEventListener('mousemove', (e) => {
+                let __canvasBounds = canvas.getBoundingClientRect();
+               
+                Mouse.setLocation({
+                    x: e.clientX - __canvasBounds.left,
+                    y: e.clientY - __canvasBounds.top
+                });
+            });
             canvas.addEventListener('click', (e) => {
-                this.init();
+
+                Balls.forEach(function(item){
+                    let _mouse = Mouse.getLocation();
+                    let distBetweenMouseAndBall = Helper.getDistance(_mouse.x, _mouse.y, item.x, item.y);
+
+                    if(distBetweenMouseAndBall < item.radius) {
+                        if (isDevEnv){console.log('ball clicked');}
+                    }
+                });
 
                 if (isDevEnv){console.log('canvas clicked')};
                 e.stopPropagation();

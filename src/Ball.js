@@ -1,8 +1,10 @@
 'use strict'
 
 import { Helper } from "./Helper";
+import { Mouse } from './Mouse';
 
 class Ball{
+    
     constructor(x, y, dy, dx, radius, color){
         this.x = x;
         this.y = y;
@@ -14,12 +16,20 @@ class Ball{
         this.color = color;
         this.weight = radius/Helper.maxRadius;
     };
+    hasColidedwithBall(ball){
+        if (Helper.getDistance(this.x, this.y, ball.x, ball.y) < this.radius + ball.radius) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     Update(Balls){
         //If the balls have colided resolve collision
         for (let i = 0; i < Balls.length; i++) {
             if (this === Balls[i]){continue;}
-            if (Helper.getDistance(this.x, this.y, Balls[i].x, Balls[i].y) < this.radius + Balls[i].radius) {
+            if (this.hasColidedwithBall(Balls[i])) {
                 Helper.resolveCollision(this,Balls[i]);
             }
         }
@@ -39,6 +49,9 @@ class Ball{
         if (this.y + this.radius + this.velocity.y > Helper.canvas.height || this.y - this.radius <= 0) {
             this.velocity.y *= -1;
         }
+
+
+        //reduce radius; opacity stuff too
 
         //Move the ball and draw new position on canvas on canvas 
         this.y += this.velocity.y;
