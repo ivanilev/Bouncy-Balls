@@ -1,13 +1,21 @@
-'use strict'
+//'use strict'
 
 // Utility Functions
-var Helper = (function(){
-    
-    const canvas = document.querySelector('canvas');
-    const canvasContext = canvas.getContext('2d');
-    const minRadius = 25;
-    const maxRadius = 35;
+var Helper = function(){
 
+    var canvas, canvasContext;
+    //not constructor
+    function LoadHelper(){
+        canvas = document.querySelector('canvas') || {};
+        canvasContext = canvas.getContext('2d');
+
+        return canvas;
+    };
+    function getCanvasAndContext(){
+        canvas = document.querySelector('canvas') || {};
+        canvasContext = canvas.getContext('2d');
+        return {canvas, canvasContext};
+    };
     /**
          * Rotates coordinate system for velocities
          *
@@ -25,7 +33,6 @@ var Helper = (function(){
 
         return rotatedVelocities;
     };
-    
     /**
          * Swaps out two colliding particles' x and y velocities after running through
          * an elastic collision reaction equation
@@ -74,6 +81,7 @@ var Helper = (function(){
         return Math.floor(Math.random() * (max - min + 1) + min)
     };
     
+    //Pythagorean theorem 
     function dist(x1, y1, x2, y2) {
         const xDist = x2 - x1;
         const yDist = y2 - y1;
@@ -97,22 +105,29 @@ var Helper = (function(){
         var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
         return colors[Math.floor(Math.random() * colors.length)]
     };
-
+    
     return {
+        LoadHelper: LoadHelper,
+        getCanvasAndContext: getCanvasAndContext,
         getRandomColor: getRandomColor,
         getRandomPrettyColor: randomPrettyColor,
         getRandomIntFromRange: randomIntFromRange,
         getDistance: dist,
-        canvas: canvas,
-        canvasContext: canvasContext,
-        minRadius: minRadius,
-        maxRadius: maxRadius,
         rotate: rotate,
         resolveCollision: resolveCollision,
+        minRadius: 15,
+        maxRadius: 45,
         GRAVITY: 1,
         FRICTION: 0.5
     };
+};
 
-}());
+var hui = function(){
+    var bla = 1;
+    var balbal= 2;
+    return{bla:bla, balbal: balbal}
+}
+export {hui};
+
 
 export {Helper};

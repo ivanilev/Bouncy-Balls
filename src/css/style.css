@@ -1,6 +1,46 @@
+html{
+    height: 99%;
+    width: 99%;
+    padding: 2px;
+    overflow: hidden;
+}
 body {
-    margin: 0;
+    margin: 2px;
     background-color: darkgrey;
+    position: relative;
+    height: 100%; 
+    width: 100%;
+}
+.container{
+    position: absolute;
+    top: 0px;
+    height: 100%;
+}
+#LeftSide{
+    left: 0px;
+    width: 33%;
+    background-color: blue;
+}
+#RightSide{
+    right: 0px;
+    width: 67%;
+    background-color: green;
+}
+
+
+
+#MainPage{
+    text-align: center;
+    display: block;
+    margin: auto;
+    padding: 10px;
+    width:25%;
+    border: solid darkblue 1px;
+    background-color: white;
+}
+button{
+    width: 150px;
+    height: 50px;
 }
 #canvas{
     background-color: white;
@@ -8,5 +48,4 @@ body {
     position: absolute;
     left: 5%;
     top: 5%;
-
 }
