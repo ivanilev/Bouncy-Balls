@@ -2,14 +2,14 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-class MainPage extends React.Component {
+class TitleComponent extends React.Component {
     render () {
       return (
-        <div id="MainPage">
+        <div id="Title">
                 <h1>Hello React!</h1>
         </div>
       );
     }
 }
 
-export default MainPage
+export default TitleComponent

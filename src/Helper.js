@@ -3,17 +3,11 @@
 // Utility Functions
 var Helper = function(){
 
-    var canvas, canvasContext;
-    //not constructor
-    function LoadHelper(){
-        canvas = document.querySelector('canvas') || {};
-        canvasContext = canvas.getContext('2d');
-
-        return canvas;
-    };
+    let canvas, canvasContext;
     function getCanvasAndContext(){
         canvas = document.querySelector('canvas') || {};
         canvasContext = canvas.getContext('2d');
+        
         return {canvas, canvasContext};
     };
     /**
@@ -101,33 +95,25 @@ var Helper = function(){
     };
 
     //Prettier random colors
-    function randomPrettyColor() {
+    function getStartingColors() {
         var colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66'];
         return colors[Math.floor(Math.random() * colors.length)]
     };
     
     return {
-        LoadHelper: LoadHelper,
         getCanvasAndContext: getCanvasAndContext,
+        getStartingColors: getStartingColors,
         getRandomColor: getRandomColor,
-        getRandomPrettyColor: randomPrettyColor,
         getRandomIntFromRange: randomIntFromRange,
         getDistance: dist,
         rotate: rotate,
         resolveCollision: resolveCollision,
+        
         minRadius: 15,
         maxRadius: 45,
         GRAVITY: 1,
         FRICTION: 0.5
     };
 };
-
-var hui = function(){
-    var bla = 1;
-    var balbal= 2;
-    return{bla:bla, balbal: balbal}
-}
-export {hui};
-
 
 export {Helper};

@@ -3,8 +3,6 @@ import {Ball} from './Ball'
 import {TestDev} from './test-dev'
 import {Mouse} from './Mouse'
 
-//require('../src/css/style.css')
-
 var isDevEnv = (process.env.NODE_ENV.trim() === 'development');
 if (isDevEnv) {
      TestDev.logEnvironment();
@@ -14,6 +12,7 @@ if (isDevEnv) {
 var Game = function(){
     var canvas, canvasContext;
     var Balls = [];
+    let _mouse = Mouse();
 
     function init(){
         var cc = Helper().getCanvasAndContext();
@@ -28,10 +27,11 @@ var Game = function(){
         addListeners();
         initObjects();
     };
-    function initObjects(){     
+    function initObjects(){
+        Balls = [];
         for (let i = 0; i < 3; i++) {
             
-            let randColor = isDevEnv ? Helper().getRandomPrettyColor() : Helper().getRandomColor();
+            let randColor = Helper().getStartingColors();
             let randSize = Helper().getRandomIntFromRange(Helper().minRadius, Helper().maxRadius); 
             let randXVelocity = Helper().getRandomIntFromRange(-2,2);
             let randYVelocity = Helper().getRandomIntFromRange(-2,2);
@@ -66,27 +66,26 @@ var Game = function(){
             init();
         });
         addEventListener('mousemove', (e) => {
-         //   let __canvasBounds = canvas.getBoundingClientRect();
+           let __canvasBounds = canvas.getBoundingClientRect();
             
-            // Mouse().setLocation({
-            //     x: e.clientX - __canvasBounds.left,
-            //     y: e.clientY - __canvasBounds.top
-            // });
-        });/*
+            _mouse.setLocation({
+                x: e.clientX - __canvasBounds.left,
+                y: e.clientY - __canvasBounds.top
+            });
+        });
         canvas.addEventListener('click', (e) => {
-
             Balls.forEach(function(item){
-                let _mouse = Mouse.getLocation();
-                let distBetweenMouseAndBall = Helper().getDistance(_mouse.x, _mouse.y, item.x, item.y);
+                let distBetweenMouseAndBall = Helper().getDistance(_mouse.getLocation().x, _mouse.getLocation().y, item.x, item.y);
 
                 if(distBetweenMouseAndBall < item.radius) {
-                    if (isDevEnv){console.log('ball clicked');}
+                    console.log('ball clicked');
+                    item.color = Helper().getRandomColor();
+                    
                 }
             });
 
-            if (isDevEnv){console.log('canvas clicked')};
             e.stopPropagation();
-        });*/
+        });
     }
     function render(){
         var self = this;
