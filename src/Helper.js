@@ -10,6 +10,16 @@ var Helper = function(){
         
         return {canvas, canvasContext};
     };
+    function getRightSideSize(){
+        let rightSide = document.getElementById('RightSide') || {width:320,height:320};
+        
+        let w = rightSide.clientWidth;
+        let h = rightSide.clientHeight;
+        return {
+            width: w, 
+            height: h
+        };
+    }
     /**
          * Rotates coordinate system for velocities
          *
@@ -102,6 +112,7 @@ var Helper = function(){
     
     return {
         getCanvasAndContext: getCanvasAndContext,
+        getRightSideSize: getRightSideSize,
         getStartingColors: getStartingColors,
         getRandomColor: getRandomColor,
         getRandomIntFromRange: randomIntFromRange,
