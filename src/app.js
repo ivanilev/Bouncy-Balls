@@ -30,10 +30,10 @@ require('../src/css/style.css');
     render(
         <div id='left_side_container'>
             <TitleComponent/>
-            <StartComponent/>
-            <StopComponent/>
             <GravityComponent/>
             <FrictionComponent/>
+            <StartComponent/>
+            <StopComponent/>
         </div>, 
         leftSide
     );

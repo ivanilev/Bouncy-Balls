@@ -5,8 +5,8 @@ import {render} from 'react-dom';
 class TitleComponent extends React.Component {
     render () {
       return (
-        <div id="Title">
-                <h1>Hello React!</h1>
+        <div id="Title" class="components">
+                <h1>Bouncy Balls!</h1>
         </div>
       );
     }

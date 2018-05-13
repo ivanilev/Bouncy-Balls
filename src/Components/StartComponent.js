@@ -1,11 +1,12 @@
-
 import React from 'react';
 import {render} from 'react-dom';
 
 class StartComponent extends React.Component {
     render () {
       return (   
-        <button>Play</button>
+        <div id="Start" class="buttonComponent">
+          <button>Play</button>
+        </div>
       );
     }
 }

@@ -4,8 +4,10 @@ import {render} from 'react-dom';
 class FrictionComponent extends React.Component {
     render () {
       return (   
-        <input type="range" id="frictionInput" />
-//        min="0" max="1" step="0.01"/>
+        <div id="friction" class="rangeComponents">
+          <label for="friction">Friction: </label>
+          <input class="sliderRange" type="range" id="frictionInput" min="1" max="5"/>
+        </div>
       );
     }
 }

@@ -5,7 +5,10 @@ import {render} from 'react-dom';
 class GravityComponent extends React.Component {
     render () {
       return (   
-        <input type="range" id="gravityInput"/>
+        <div id = "gravity" class="rangeComponents">
+          <label for="gravity">Gravity pull: </label>
+          <input class="sliderRange"  type="range" id="gravityInput"/>
+        </div>
       );
     }
 }
