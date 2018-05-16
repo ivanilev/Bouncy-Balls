@@ -15,12 +15,10 @@ var Game = function(){
     let _mouse = Mouse();
 
     function init(){
-        var cc = Helper().getCanvasAndContext();
-       
-        let canvasSize = Helper().getRightSideSize();
+        let canvasSize = Helper.getCanvasContainerSize();
 
-        canvas = cc.canvas || {};
-        canvasContext = cc.canvasContext || {};
+        canvas = Helper.canvas || {};
+        canvasContext = Helper.canvasContext || {};
 
         canvas.width = canvasSize.width * (9/10);
         canvas.height =  canvasSize.height * (9/10);
@@ -34,20 +32,20 @@ var Game = function(){
         Balls = [];
         for (let i = 0; i < 3; i++) {
             
-            let randColor = Helper().getStartingColors();
-            let randRadius = Helper().getRandomIntFromRange(Helper().minRadius, Helper().maxRadius); 
-            let randXVelocity = Helper().getRandomIntFromRange(-2,2);
-            let randYVelocity = Helper().getRandomIntFromRange(-2,2);
+            let randColor = Helper.getStartingColors();
+            let randRadius = Helper.randomIntFromRange(Helper.minRadius, Helper.maxRadius); 
+            let randXVelocity = Helper.randomIntFromRange(-2,2);
+            let randYVelocity = Helper.randomIntFromRange(-2,2);
 
-            let randX = Helper().getRandomIntFromRange(randRadius*2, canvas.width - randRadius*2);
-            let randY = Helper().getRandomIntFromRange(randRadius*2, (canvas.height/2) - randRadius*2);
+            let randX = Helper.randomIntFromRange(randRadius*2, canvas.width - randRadius*2);
+            let randY = Helper.randomIntFromRange(randRadius*2, (canvas.height/2) - randRadius*2);
 
             if (i!==0){   
                 for (let j = 0; j < Balls.length; j++) {
                     //if it's overlapping on spawn place it somewhere else
-                    if (Helper().getDistance(randX, randY, Balls[j].x, Balls[j].y)  < Helper().maxRadius * 2){
-                        randX = Helper().getRandomIntFromRange(randRadius*2, canvas.width - randRadius*2);
-                        randY = Helper().getRandomIntFromRange(randRadius*2, (canvas.height/2) - randRadius*2);
+                    if (Helper.getDistance(randX, randY, Balls[j].x, Balls[j].y)  < Helper.maxRadius * 2){
+                        randX = Helper.randomIntFromRange(randRadius*2, canvas.width - randRadius*2);
+                        randY = Helper.randomIntFromRange(randRadius*2, (canvas.height/2) - randRadius*2);
 
                         j = -1;
                     }
@@ -79,15 +77,26 @@ var Game = function(){
         canvas.addEventListener('click', (e) => {
             e.stopPropagation();
             Balls.forEach(function(item){
-                let distBetweenMouseAndBall = Helper().getDistance(_mouse.getLocation().x, _mouse.getLocation().y, item.x, item.y);
+                let distBetweenMouseAndBall = Helper.getDistance(_mouse.getLocation().x, _mouse.getLocation().y, item.x, item.y);
 
                 if(distBetweenMouseAndBall < item.radius) {
-                    console.log(Balls.length);
-                    item.color = Helper().getRandomColor();
+                    item.color = Helper.getRandomColor();
                     
                 }
+                
+                if (isDevEnv){
+                    console.log(
+                        " y = " + item.y + 
+                        " velocity = " + item.velocity.y +
+                        " radius = " + item.radius + 
+                        " color = " + item.color
+                    );
+                }
             });
-
+            if (isDevEnv){
+                console.log('FRICTION: ' + Helper.FRICTION);
+                console.log('GRAVITY: ' + Helper.GRAVITY);
+            }
         });
     }
     function render(){

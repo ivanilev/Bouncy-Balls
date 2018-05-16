@@ -38,19 +38,9 @@ require('../src/css/style.css');
         leftSide
     );
 
-    let canvas = Helper().getCanvasAndContext().canvas;
+    Helper.setCanvasAndContext();
     let game = Game();
     game.init();
     game.render();
-
-    
-    // let $button = document.getElementById('Pla1y');
-
-    // function showCanvas() {
-    //     alert('hui');
-    // }
-
-    // $button.on('click', showCanvas);
-    // PubSub.Subscribe('PLAYBUTTONCLICKED', showCanvas);
     
 }());
