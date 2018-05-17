@@ -30,9 +30,9 @@ class GravityComponent extends React.Component {
     
   render(){
     return (
-      <div id="gravity" class="rangeComponents">
-        <label for="gravity">Gravity pull: </label>
-        <input type="range" 
+      <div className="componentContainer"  style={{top:'25px'}} >
+        <label htmlFor="gravity">Gravity:</label>
+        <input type="range" className="slider" 
           value={this.state.currentValue} 
           min={this.state.minValue} 
           max={this.state.maxValue} 

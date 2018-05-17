@@ -30,9 +30,9 @@ class FrictionComponent extends React.Component {
     
   render(){
     return (
-      <div id="friction" class="rangeComponents">
-        <label for="friction">Friction pull: </label>
-        <input type="range" 
+      <div className="componentContainer" style={{top:'40px'}} >
+        <label htmlFor="friction">Friction:</label>
+        <input type="range" className="slider" 
           value={this.state.currentValue} 
           min={this.state.minValue} 
           max={this.state.maxValue} 

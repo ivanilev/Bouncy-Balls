@@ -1,7 +1,8 @@
 
 import TitleComponent from './Components/TitleComponent';
-import StartComponent from './Components/StartComponent';
-import StopComponent from './Components/StopComponent';
+
+import ButtonsComponent from './Components/ButtonsComponent';
+
 import GravityComponent from './Components/GravityComponent';
 import FrictionComponent from './Components/FrictionComponent';
 import CanvasComponent from './Components/CanvasComponent';
@@ -32,8 +33,7 @@ require('../src/css/style.css');
             <TitleComponent/>
             <GravityComponent/>
             <FrictionComponent/>
-            <StartComponent/>
-            <StopComponent/>
+            <ButtonsComponent/>
         </div>, 
         leftSide
     );

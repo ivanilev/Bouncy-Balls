@@ -4,144 +4,132 @@ html{
     margin: 1px;
     overflow: hidden;
 }
+
 body {
     position: relative;
     height: 99%;
     width: 99%; 
-    margin: auto;
-    background-color: darkgrey;
+    margin: 0px;
+    padding: 0px;
+    background-color: #222222;
 }
-.container{
+div{
+    padding:0px;
+    margin: 0px;
+}
+.sideContainer{
     position: absolute;
     height: 100%;
 }
 #LeftSide{
     left: 0px;    
+    float: right;
     width: 25%;
-    background-color: lightblue;
-    border: solid 1px whitesmoke;
+    background-color: #222222;
+    border-right: solid 1px red;
 }
 #RightSide{
     right: 0px;
     width: 75%;
-    background-color: lightcyan;
-    border: solid 1px whitesmoke;
+    background-color: #222222;
+    border-right: solid 1px #343434;
+    border-top: solid 1px #343434;
+    border-bottom: solid 1px #343434;
+    
 }
+
 #canvas{
-    background-color: white;
-    border: 1px solid black;
     position: absolute;
     left: 5%;
     top: 5%;
-}
-.rangeComponents{
-    position: relative;
-    display: block;
-    width: 80%;
-    height: 50px;
-    margin: auto;
-    border: solid 1px black;
-}
-#gravity{
-    top:20px;    
-    width: 66%;
-}
-#friction{
-    top:25px; 
-    width: 66%;
-}
-label{
-    vertical-align: auto;
-    float: left;
-    width: auto;
-}
-.sliderRange{
-    height: 25px; /* Specified height */
-    float: right;
-    width: 50%;
-    position: relative;
-}
-.buttonComponent{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 35px;
-    width: 150px;
-    height: 50px;
-    margin: auto;
-}
-button{
-    width: 150px;
-    height: 50px;
-    margin: auto;
+
+    background-color: white;
+    border: 1px solid #171717;
 }
 
-#Title{
+.componentContainer{
+    color: #81BE00;
+
+    background-color: #363636;
+    border: 1px solid #171717;
+
+    width: 95%;
+    min-height: 50px;
+    
     position: relative;
+    padding: 0px;
+    margin: 0px;
     text-align: center;
+    font-weight: 900;
+
+}
+#Title{
     top:10px;
-    display: block;
-    margin: auto;
-    padding: 10px;
-    width:70%;
-    background-color: whitesmoke;
-    border-radius: 5%;
+    border-radius: 5px;
 }
-/* #Start{
-    top: 25px;
-}
-#Stop{
-    top:50px;
-} */
 
-
-/*
-.components{
-    display: block;
+ 
+label{ 
     margin: auto;
+    padding: 0px;
+    display: block;
+    width: 95%;   
+    height: 25px;
+}
+.Buttons{
     width: 40%;
     height: 50px;
-    position:relative;
-    border: solid 1px black;
+    display: inline-block;
+
+    font-weight: 900;
+
+    margin: 5px;
+
+    color: #81BE00;
+
+    background-color: #363636;
+    border: 1px solid #171717;
+    
+    cursor: pointer;
 }
-#gravity{
-    top:75px;    
-    width: 66%;
-}
-#friction{
-    top:100px; 
-    width: 66%;
-}
-#Title{
-    text-align: center;
-    top:10px;
-    display: block;
-    margin: auto;
-    padding: 10px;
-    width:70%;
-    background-color: whitesmoke;
-    border-radius: 5%;
-}
-#Start{
-    top: 25px;
+#PlayButton{
     height: 50px;
 }
-#Stop{
-    top:50px;
+#StopButton{
     height: 50px;
+
 }
-button{
-    box-sizing: border-box;
-    display: block;
-    width: 100%;
-    height: 100%;
+.Buttons:hover{
+    background-color: #222222;
 }
-/*
-button{
-    top:0px;
-    display: block;
-    width: 150px;
-    height: 50px;
-    margin: auto;
-}*/
+
+.slider {
+    -webkit-appearance: none;
+    width: 90%;
+    height: 25px;
+    background: #363636;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #81BE00;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #81BE00;
+    cursor: pointer;
+}
