@@ -1,11 +1,10 @@
 
+import CanvasComponent from './Components/CanvasComponent';
+
 import TitleComponent from './Components/TitleComponent';
-
-import ButtonsComponent from './Components/ButtonsComponent';
-
 import GravityComponent from './Components/GravityComponent';
 import FrictionComponent from './Components/FrictionComponent';
-import CanvasComponent from './Components/CanvasComponent';
+import ButtonsComponent from './Components/ButtonsComponent';
 
 import React from 'react';
 import {render} from 'react-dom';
@@ -16,18 +15,13 @@ import {TestDev} from './test-dev';
 import {PubSub} from './PubSub';
 
 require('../src/css/style.css');
+require('../src/css/slidersStyle.css');
+require('../src/css/buttonsStyle.css');
+
 
 
 (function(){
     let leftSide = document.getElementById('LeftSide');
-    let rightSide = document.getElementById('RightSide');
-    render (
-        <div id='right_side_container'>
-            <CanvasComponent/>
-        </div>,
-        rightSide
-    );
-    
     render(
         <div id='left_side_container'>
             <TitleComponent/>
@@ -37,7 +31,7 @@ require('../src/css/style.css');
         </div>, 
         leftSide
     );
-
+    
     Helper.setCanvasAndContext();
     let game = Game();
     game.init();

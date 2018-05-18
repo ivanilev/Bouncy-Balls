@@ -1,0 +1,26 @@
+.Buttons{
+    width: 40%;
+    height: 50px;
+    display: inline-block;
+
+    font-weight: 900;
+
+    margin: 5px;
+
+    color: #81BE00;
+
+    background-color: #363636;
+    border: 1px solid #171717;
+    
+    cursor: pointer;
+}
+.Buttons:hover{
+    background-color: #222222;
+}
+#PlayButton{
+    height: 50px;
+}
+#StopButton{
+    height: 50px;
+
+}

@@ -10,4 +10,9 @@ class CanvasComponent extends React.Component {
     }
 }
 
+render(
+  <CanvasComponent/>,
+  document.getElementById('RightSide')
+);
+
 export default CanvasComponent
