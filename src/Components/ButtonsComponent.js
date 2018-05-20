@@ -72,14 +72,14 @@ class ButtonsComponent extends React.Component {
           onMouseEnter={this.handlePlayHovered.bind(this, "PlayButtonHovered")} 
           onMouseLeave={this.handlePlayUnhovered.bind(this, "PlayButtonUnHovered")} 
           style={this.state.playButtonStyle}>
-            Play
+            
         </button>
         <button className="Buttons" id="StopButton" 
         onClick={this.handleStopClick}
         onMouseEnter={this.handleStopHovered.bind(this, "StopButtonHovered")} 
         onMouseLeave={this.handleStopUnhovered.bind(this, "StopButtonUnHovered")}
         style={this.state.stopButtonStyle}>
-          Stop
+         
         </button>
       </div>
     );
